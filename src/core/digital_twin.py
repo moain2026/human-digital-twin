@@ -9,11 +9,12 @@ from dataclasses import dataclass, field
 from datetime import datetime
 from typing import Optional
 
-from ..core.patient.models import PatientDigitalTwin, Biomarkers, BergmanParameters
+from ..core.patient.models import PatientDigitalTwin, Biomarkers
 from ..natural_products.database.compound_db import NaturalProductsDB
 from ..prediction.network_pharmacology.analyzer import NetworkPharmacologyAnalyzer
 from ..simulation.pbpk.engine import CompoundProperties, DosingRegimen, PBPKEngine
 from ..simulation.glucose.bergman import (
+    BergmanParameters,
     BergmanGlucoseSimulator,
     MealInput,
     NaturalProductIntervention,
