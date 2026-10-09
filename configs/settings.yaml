@@ -1,0 +1,76 @@
+app:
+  name: "Human Digital Twin"
+  version: "0.1.0"
+  debug: false
+  log_level: "INFO"
+
+api:
+  host: "0.0.0.0"
+  port: 8000
+  cors_origins: ["http://localhost:3000", "http://localhost:8501"]
+
+database:
+  url: "sqlite+aiosqlite:///./data/databases/hdt.db"
+  echo: false
+
+external_apis:
+  pubchem:
+    base_url: "https://pubchem.ncbi.nlm.nih.gov/rest/pug"
+    rate_limit_per_second: 5
+  swiss_target_prediction:
+    base_url: "https://www.swisstargetprediction.ch"
+    rate_limit_per_second: 2
+  swiss_adme:
+    base_url: "http://www.swissadme.ch"
+    rate_limit_per_second: 2
+  protox:
+    base_url: "https://tox.charite.de/protox3"
+    rate_limit_per_second: 1
+  tcmsp:
+    base_url: "https://www.tcmsp-e.com"
+    rate_limit_per_second: 2
+  chembl:
+    base_url: "https://www.ebi.ac.uk/chembl/api/data"
+    rate_limit_per_second: 10
+
+simulation:
+  pbpk:
+    default_species: "human"
+    default_age: 30
+    default_weight_kg: 70
+    default_height_cm: 170
+    default_sex: "male"
+    compartments:
+      - blood
+      - liver
+      - kidney
+      - gut
+      - muscle
+      - fat
+      - brain
+      - lung
+  glucose:
+    sampling_interval_min: 5
+    meal_duration_min: 30
+    basal_glucose_mmol_L: 5.5
+    basal_insulin_pmol_L: 60
+  cardiovascular:
+    basal_systolic_bp_mmhg: 120
+    basal_diastolic_bp_mmhg: 80
+    basal_heart_rate_bpm: 70
+
+prediction:
+  ml:
+    model_dir: "./data/models"
+    confidence_threshold: 0.7
+  network_pharmacology:
+    string_score_threshold: 400
+    max_targets: 50
+  toxicity:
+    ld50_unit: "mg/kg"
+    safety_threshold_mg_kg: 300
+
+dashboard:
+  host: "0.0.0.0"
+  port: 8501
+  theme: "dark"
